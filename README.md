@@ -4,7 +4,7 @@
 1. setup packer
 ```
 cd packer
-packer init
+packer init config.pkr.hcl
 ```
 2. build cloud-config.yml
 Set up a cloud-config so that you can use your own ssh keys. @TODO
