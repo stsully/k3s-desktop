@@ -1,0 +1,22 @@
+$script = <<EOF
+set -ex
+k3os config
+cat /etc/rancher/k3s/k3s.yaml
+EOF
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "k3os"
+  config.vm.network "forwarded_port", guest: 6443, host: 6443
+	config.vm.hostname = "k3os-desktop"
+  config.ssh.username = "rancher"
+  config.ssh.forward_agent = true
+  config.ssh.keys_only = false
+	config.vm.provider "virtualbox" do |v|
+		v.memory = 2048
+		v.cpus = 2
+	end
+  config.vm.provision "shell", inline: $script
+end
+
+#ssh 127.0.0.1 -l rancher -p 2222 'sudo k3os config; sudo cat /etc/rancher/k3s/k3s.yaml' |tee -a k3s.yaml
+#export KUBECONFIG=$PWD/k3s.yaml

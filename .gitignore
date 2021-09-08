@@ -1,0 +1,6 @@
+*-rsa
+*-rsa.pub
+.vagrant/
+packer_cache
+*.box
+k3s.yaml

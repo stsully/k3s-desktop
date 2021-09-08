@@ -1,0 +1,5 @@
+ssh_authorized_keys:
+- ssh-rsa {MYPUBKEY}
+
+k3os:
+  password: rancher

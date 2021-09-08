@@ -1,0 +1,40 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<wait10>",
+        "rancher<enter>",
+        "<wait4>",
+		"PACKER_USER={{ user `username` }}<enter>",
+		"echo '{{ .SSHPublicKey }}' |tee -a /home/rancher/.ssh/authorized_keys<enter>",
+        "wget https://artifactory-phx-prod.cdaas.oraclecloud.com/artifactory/generic-silver-dev/test/cloud-config.yml<enter>",
+        "sudo k3os install<enter>",
+        "1<enter>",
+        "y<enter>",
+        "/home/rancher/cloud-config.yml<enter>",
+        "Y<enter>"
+      ],
+      "boot_wait": "24s",
+      "disk_size": "8000",
+      "format": "ova",
+      "guest_os_type": "Linux_64",
+      "iso_checksum": "sha256:85a560585bc5520a793365d70e6ce984f3fb2ce5a43b31f0f7833dc347487e69",
+      "iso_url": "https://github.com/rancher/k3os/releases/download/v0.20.7-k3s1r0/k3os-amd64.iso",
+      "output_directory": "boxes",
+      "post_shutdown_delay": "10s",
+      "shutdown_command": "sudo poweroff",
+      "ssh_timeout": "100s",
+      "ssh_username": "rancher",
+      "type": "virtualbox-iso"
+    }
+  ],
+  "post-processors": [
+    "vagrant"
+  ],
+  "provisioners": [
+  ],
+  "variables": {
+    "password": "rancher",
+    "username": "rancher"
+  }
+}
